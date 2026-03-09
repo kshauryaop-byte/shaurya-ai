@@ -3,71 +3,136 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My animated World</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <title>Shaurya AI | Interactive Portfolio</title>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; scroll-behavior: smooth; }
-        body { background: #0b0b0b; color: white; overflow-x: hidden; }
+        :root { --primary: #38bdf8; --secondary: #818cf8; --accent: #f472b6; --bg: #030712; }
+        * { box-sizing: border-box; scroll-behavior: smooth; }
+        body { margin: 0; font-family: 'Segoe UI', sans-serif; background: var(--bg); color: white; overflow-x: hidden; }
+        #particles-js { position: fixed; width: 100%; height: 100%; z-index: -1; }
 
-        /* Background Animation */
-        .bg-glow { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at 50% 50%, #1a1a2e 0%, #000 100%); z-index: -1; }
-
-        nav { padding: 20px 5%; display: flex; justify-content: space-between; align-items: center; position: fixed; width: 100%; z-index: 1000; background: rgba(0,0,0,0.8); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(255,255,255,0.1); }
-        .logo { font-size: 22px; font-weight: 600; color: #00d4ff; letter-spacing: 2px; }
-
-        .hero { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 0 20px; }
-        .hero h1 { font-size: 3.5rem; margin-bottom: 15px; background: linear-gradient(45deg, #00d4ff, #0055ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 700; }
-        .hero p { font-size: 1.1rem; color: #aaa; max-width: 600px; }
-
-        /* Working Button Style */
-        .btn { margin-top: 35px; padding: 15px 40px; border: 2px solid #00d4ff; background: transparent; color: #00d4ff; font-weight: 600; border-radius: 50px; cursor: pointer; transition: 0.4s; text-decoration: none; display: inline-block; text-transform: uppercase; letter-spacing: 1px; }
-        .btn:hover { background: #00d4ff; color: #000; box-shadow: 0 0 30px rgba(0, 212, 255, 0.5); transform: translateY(-5px); }
-
-        /* Introduction Section (Hidden initially or for scrolling) */
-        .intro-section { min-height: 100vh; padding: 100px 10% 50px; display: flex; flex-direction: column; align-items: center; justify-content: center; background: #0f0f15; }
-        .profile-card { background: rgba(255,255,255,0.03); padding: 40px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.1); text-align: center; max-width: 700px; box-shadow: 0 10px 50px rgba(0,0,0,0.5); }
-        .profile-img { width: 120px; height: 120px; border-radius: 50%; border: 3px solid #00d4ff; margin-bottom: 20px; object-fit: cover; }
-        .intro-section h2 { font-size: 2.5rem; color: #fff; margin-bottom: 20px; }
-        .intro-section p { font-size: 1.1rem; color: #ccc; line-height: 1.8; }
+        /* Login Screen */
+        #login-screen { height: 100vh; display: flex; justify-content: center; align-items: center; transition: 0.8s; }
+        .auth-box { background: rgba(255,255,255,0.05); backdrop-filter: blur(15px); padding: 40px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.1); width: 320px; text-align: center; }
+        input, textarea { width: 100%; padding: 12px; margin: 10px 0; border-radius: 8px; border: 1px solid rgba(255,255,255,0.2); background: rgba(0,0,0,0.5); color: white; outline: none; }
         
-        footer { padding: 30px; text-align: center; font-size: 0.9rem; color: #555; }
+        .btn { width: 100%; padding: 12px; margin-top: 10px; border: none; border-radius: 8px; background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; font-weight: bold; cursor: pointer; transition: 0.3s; }
+        .btn:hover { transform: scale(1.03); box-shadow: 0 0 15px var(--primary); }
+
+        /* Main Content */
+        #main-content { display: none; opacity: 0; transition: 1s; padding: 20px; }
+        section { min-height: 100vh; padding: 60px 0; max-width: 900px; margin: auto; text-align: center; }
+        
+        .hero h1 { font-size: 3.5rem; background: linear-gradient(to right, var(--primary), var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 10px; }
+        
+        /* Tool Cards */
+        .tools-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; margin-top: 40px; }
+        .tool-card { background: rgba(255,255,255,0.03); padding: 25px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.1); transition: 0.4s; text-align: left; }
+        .tool-card:hover { border-color: var(--primary); transform: translateY(-5px); }
+        .tool-card h3 { color: var(--primary); margin-top: 0; }
+        
+        .result-box { margin-top: 15px; padding: 10px; background: rgba(56, 189, 248, 0.1); border-radius: 5px; font-family: monospace; min-height: 40px; word-break: break-all; }
+
+        footer { margin-top: 50px; padding: 30px; border-top: 1px solid rgba(255,255,255,0.1); color: #64748b; }
     </style>
 </head>
 <body>
 
-    <div class="bg-glow"></div>
+    <div id="particles-js"></div>
 
-    <nav>
-        <div class="logo">OWNER BRAND</div>
-    </nav>
-
-    <section class="hero">
-        <h1 data-aos="zoom-out">SHAURYA KUSHWAH</h1>
-        <p data-aos="fade-up" data-aos-delay="300">KALYAN PAGAL hai</p>
-        
-        <a href="#about" class="btn" data-aos="fade-up" data-aos-delay="600"> My Introduction</a>
-    </section>
-
-    <section id="about" class="intro-section">
-        <div class="profile-card" data-aos="fade-up">
-            <img src="https://via.placeholder.com/150" alt="My Profile" class="profile-img">
-            <h2>About Me</h2>
-            <p>
-                Namaste! Mera naam <b>SHAURYA KUSHWAHA</b> hai. Main ek creative developer hoon jo apne phone ka use karke advanced cheezein banana pasand karta hoon. <br><br>
-                Mujhe technologies, AI, aur web design mein bahut interest hai. Ye website meri mehnat ka ek chhota sa hissa hai. Main chahta hoon ki duniya dekhe ki ek phone se bhi premium level ka kaam ho sakta hai!
-            </p>
-            <a href="#" class="btn" style="margin-top: 20px; padding: 10px 25px; font-size: 0.8rem;">Contact Me</a>
+    <div id="login-screen">
+        <div class="auth-box">
+            <h2>Shaurya AI</h2>
+            <input type="text" id="user-name" placeholder="Enter Your Name">
+            <button class="btn" onclick="login()">Open Dashboard</button>
         </div>
-    </section>
+    </div>
 
-    <footer>
-        &copy; 2026 | Created ❤️ on Mobile
-    </footer>
+    <div id="main-content">
+        <section class="hero">
+            <h1 id="greet">Namaste!</h1>
+            <p style="color: #94a3b8;">Main Shaurya hoon. Neeche mere banaye huye interactive tools dekhiye.</p>
+            
+            <div class="tools-grid">
+                <div class="tool-card">
+                    <h3>1. Text Transformer</h3>
+                    <p style="font-size: 0.8rem; color: gray;">Frontend JS Tool</p>
+                    <textarea id="textInput" placeholder="Yahan kuch likhein..."></textarea>
+                    <div style="display: flex; gap: 10px;">
+                        <button class="btn" onclick="transformText('up')">UPPER</button>
+                        <button class="btn" onclick="transformText('low')">lower</button>
+                    </div>
+                    <div class="result-box" id="textResult">Result yahan dikhega...</div>
+                </div>
 
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+                <div class="tool-card">
+                    <h3>2. Prompt Engineer</h3>
+                    <p style="font-size: 0.8rem; color: gray;">AI Logic Tool</p>
+                    <input type="text" id="topic" placeholder="Topic (e.g. Coding)">
+                    <button class="btn" onclick="generatePrompt()">Generate Prompt</button>
+                    <div class="result-box" id="promptResult">Aapka AI Prompt yahan banega...</div>
+                </div>
+
+                <div class="tool-card">
+                    <h3>3. Smart Calculator</h3>
+                    <p style="font-size: 0.8rem; color: gray;">Computation Tool</p>
+                    <input type="text" id="calcInput" placeholder="Example: 50 + 20 * 2">
+                    <button class="btn" onclick="calculate()">Solve It</button>
+                    <div class="result-box" id="calcResult">Ans: 0</div>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <p>Shaurya AI Labs &copy; 2026</p>
+            <button class="btn" style="width: auto; background: none; color: gray;" onclick="location.reload()">Logout</button>
+        </footer>
+    </div>
+
     <script>
-      AOS.init({ duration: 1200, once: false }); // once false rakha hai taaki baar baar animation ho
+        // Login Logic
+        function login() {
+            const name = document.getElementById('user-name').value;
+            if(!name) return alert("Please enter your name!");
+            document.getElementById('greet').innerText = "Namaste, " + name + "!";
+            document.getElementById('login-screen').style.display = "none";
+            const main = document.getElementById('main-content');
+            main.style.display = "block";
+            setTimeout(() => { main.style.opacity = "1"; }, 50);
+        }
+
+        // Tool 1: Text Logic
+        function transformText(mode) {
+            const val = document.getElementById('textInput').value;
+            document.getElementById('textResult').innerText = mode === 'up' ? val.toUpperCase() : val.toLowerCase();
+        }
+
+        // Tool 2: AI Prompt Logic
+        function generatePrompt() {
+            const topic = document.getElementById('topic').value;
+            if(!topic) return alert("Topic daalein!");
+            document.getElementById('promptResult').innerText = `Act as an expert in ${topic}. Explain the core concepts of ${topic} like I am five years old, and provide 3 practical examples.`;
+        }
+
+        // Tool 3: Calc Logic
+        function calculate() {
+            try {
+                const res = eval(document.getElementById('calcInput').value);
+                document.getElementById('calcResult').innerText = "Ans: " + res;
+            } catch(e) {
+                document.getElementById('calcResult').innerText = "Error: Invalid Math!";
+            }
+        }
+
+        // Particles
+        particlesJS("particles-js", {
+            "particles": {
+                "number": { "value": 60 },
+                "color": { "value": "#38bdf8" },
+                "line_linked": { "enable": true, "opacity": 0.1 },
+                "move": { "speed": 1.2 }
+            }
+        });
     </script>
 </body>
 </html>
