@@ -1,59 +1,73 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>shaurya website</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>My animated World</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <style>
-        body { background: #0f172a; color: white; overflow-x: hidden; }
-        .glass { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); }
-        .gradient-text { background: linear-gradient(90deg, #38bdf8, #818cf8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; scroll-behavior: smooth; }
+        body { background: #0b0b0b; color: white; overflow-x: hidden; }
+
+        /* Background Animation */
+        .bg-glow { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at 50% 50%, #1a1a2e 0%, #000 100%); z-index: -1; }
+
+        nav { padding: 20px 5%; display: flex; justify-content: space-between; align-items: center; position: fixed; width: 100%; z-index: 1000; background: rgba(0,0,0,0.8); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .logo { font-size: 22px; font-weight: 600; color: #00d4ff; letter-spacing: 2px; }
+
+        .hero { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 0 20px; }
+        .hero h1 { font-size: 3.5rem; margin-bottom: 15px; background: linear-gradient(45deg, #00d4ff, #0055ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 700; }
+        .hero p { font-size: 1.1rem; color: #aaa; max-width: 600px; }
+
+        /* Working Button Style */
+        .btn { margin-top: 35px; padding: 15px 40px; border: 2px solid #00d4ff; background: transparent; color: #00d4ff; font-weight: 600; border-radius: 50px; cursor: pointer; transition: 0.4s; text-decoration: none; display: inline-block; text-transform: uppercase; letter-spacing: 1px; }
+        .btn:hover { background: #00d4ff; color: #000; box-shadow: 0 0 30px rgba(0, 212, 255, 0.5); transform: translateY(-5px); }
+
+        /* Introduction Section (Hidden initially or for scrolling) */
+        .intro-section { min-height: 100vh; padding: 100px 10% 50px; display: flex; flex-direction: column; align-items: center; justify-content: center; background: #0f0f15; }
+        .profile-card { background: rgba(255,255,255,0.03); padding: 40px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.1); text-align: center; max-width: 700px; box-shadow: 0 10px 50px rgba(0,0,0,0.5); }
+        .profile-img { width: 120px; height: 120px; border-radius: 50%; border: 3px solid #00d4ff; margin-bottom: 20px; object-fit: cover; }
+        .intro-section h2 { font-size: 2.5rem; color: #fff; margin-bottom: 20px; }
+        .intro-section p { font-size: 1.1rem; color: #ccc; line-height: 1.8; }
+        
+        footer { padding: 30px; text-align: center; font-size: 0.9rem; color: #555; }
     </style>
 </head>
 <body>
 
-    <nav class="fixed w-full z-50 p-6 flex justify-between items-center glass">
-        <div class="text-2xl font-bold tracking-tighter">LOGO</div>
-        <ul class="flex gap-8 font-medium">
-            <li class="hover:text-blue-400 cursor-pointer transition">Home</li>
-            <li class="hover:text-blue-400 cursor-pointer transition">About</li>
-            <li class="bg-blue-600 px-4 py-1 rounded-full cursor-pointer hover:bg-blue-500 transition">Contact</li>
-        </ul>
+    <div class="bg-glow"></div>
+
+    <nav>
+        <div class="logo">OWNER BRAND</div>
     </nav>
 
-    <section class="h-screen flex flex-col justify-center items-center text-center p-4">
-        <h1 data-aos="zoom-in" data-aos-duration="1000" class="text-6xl md:text-8xl font-black mb-4">
-            I am <span class="gradient-text text-uppercase">[YOUR NAME]</span>
-        </h1>
-        <p data-aos="fade-up" data-aos-delay="300" class="text-gray-400 text-xl max-w-2xl">
-            Creating digital experiences that matter. Welcome to my premium space.
-        </p>
-        <div data-aos="fade-up" data-aos-delay="600" class="mt-8">
-            <button class="bg-white text-black px-8 py-3 rounded-full font-bold hover:scale-105 transition-transform">Explore My Work</button>
+    <section class="hero">
+        <h1 data-aos="zoom-out">SHAURYA KUSHWAH</h1>
+        <p data-aos="fade-up" data-aos-delay="300">KALYAN PAGAL hai</p>
+        
+        <a href="#about" class="btn" data-aos="fade-up" data-aos-delay="600"> My Introduction</a>
+    </section>
+
+    <section id="about" class="intro-section">
+        <div class="profile-card" data-aos="fade-up">
+            <img src="https://via.placeholder.com/150" alt="My Profile" class="profile-img">
+            <h2>About Me</h2>
+            <p>
+                Namaste! Mera naam <b>SHAURYA KUSHWAHA</b> hai. Main ek creative developer hoon jo apne phone ka use karke advanced cheezein banana pasand karta hoon. <br><br>
+                Mujhe technologies, AI, aur web design mein bahut interest hai. Ye website meri mehnat ka ek chhota sa hissa hai. Main chahta hoon ki duniya dekhe ki ek phone se bhi premium level ka kaam ho sakta hai!
+            </p>
+            <a href="#" class="btn" style="margin-top: 20px; padding: 10px 25px; font-size: 0.8rem;">Contact Me</a>
         </div>
     </section>
 
-    <section class="py-20 px-10 grid grid-cols-1 md:grid-cols-3 gap-8">
-        <div data-aos="fade-right" class="glass p-8 rounded-3xl h-64 flex items-end">
-            <h3 class="text-2xl font-bold">Innovation</h3>
-        </div>
-        <div data-aos="fade-up" class="glass p-8 rounded-3xl h-64 flex items-end border-blue-500/50">
-            <h3 class="text-2xl font-bold">Premium Design</h3>
-        </div>
-        <div data-aos="fade-left" class="glass p-8 rounded-3xl h-64 flex items-end">
-            <h3 class="text-2xl font-bold">Smooth Experience</h3>
-        </div>
-    </section>
-
-    <footer class="p-10 text-center text-gray-500 border-t border-gray-800">
-        &copy; 2024 Your Name. All Rights Reserved.
+    <footer>
+        &copy; 2026 | Created ❤️ on Mobile
     </footer>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        AOS.init({ duration: 1000, once: false });
+      AOS.init({ duration: 1200, once: false }); // once false rakha hai taaki baar baar animation ho
     </script>
 </body>
 </html>
